@@ -1,0 +1,29 @@
+services:
+  audiobookshelf:
+    image: ghcr.io/advplyr/audiobookshelf:latest
+    container_name: audiobookshelf
+    environment:
+      - TZ=${TIMEZONE}
+    volumes:
+      - ${CONFIG_ROOT:-.}/audiobookshelf/config:/config
+      - ${CONFIG_ROOT:-.}/audiobookshelf/metadata:/metadata
+      - ${DATA_ROOT}/media/audiobooks:/audiobooks
+      - ${DATA_ROOT}/media/podcasts:/podcasts
+    restart: always
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.audiobookshelf.rule=(Host(`${HOSTNAME}`) && PathPrefix(`/audiobookshelf`))
+      - traefik.http.routers.audiobookshelf.tls=true
+      - traefik.http.routers.audiobookshelf.tls.certresolver=myresolver
+      - traefik.http.services.audiobookshelf.loadbalancer.server.port=80
+      - homepage.group=Media
+      - homepage.name=Audiobookshelf
+      - homepage.icon=audiobookshelf.png
+      - homepage.href=/audiobookshelf
+      - homepage.description=Audiobooks and podcasts
+      - homepage.weight=6
+      - homepage.widget.type=audiobookshelf
+      - homepage.widget.url=http://audiobookshelf:80
+      - homepage.widget.key=${AUDIOBOOKSHELF_API_KEY}
+    profiles:
+      - audiobookshelf

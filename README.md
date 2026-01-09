@@ -45,6 +45,7 @@ I am running it in Ubuntu Server 22.04; I also tested this setup on a [Synology 
     - [Home Assistant](#home-assistant)
     - [Immich](#immich)
     - [Vaultwarden](#vaultwarden)
+    - [Audiobookshelf](#audiobookshelf)
   - [Customization](#customization)
     - [Optional: Using the VPN for \*arr apps](#optional-using-the-vpn-for-arr-apps)
   - [Synology Quirks](#synology-quirks)
@@ -90,6 +91,7 @@ I am running it in Ubuntu Server 22.04; I also tested this setup on a [Synology 
 | [Huntarr](https://github.com/PlexGuide/Huntarr)                    | Optional - Huntarr is a specialized utility that automates discovering missing and upgrading your media collection<br/>Enable with `COMPOSE_PROFILES=huntarr` | [plexguide/huntarr](https://ghcr.io/plexguide/huntarr)                                   | /huntarr               |
 | [Cross-Seed](https://github.com/cross-seed/cross-seed)             | Optional - Cross-Seed is a tool for automating the cross-seeding of torrents<br/>Enable with `COMPOSE_PROFILES=cross-seed`                                    | [cross-seed/cross-seed](https://ghcr.io/cross-seed/cross-seed)                           |                        |
 | [Autobrr](https://github.com/autobrr/autobrr)                      | Optional - Autobrr is a tool for automating the downloading of torrents<br/>Enable with `COMPOSE_PROFILES=autobrr`                                            | [autobrr/autobrr](https://ghcr.io/autobrr/autobrr)                                       | /autobrr               |
+| [Audiobookshelf](https://www.audiobookshelf.org)                   | Optional - Self-hosted audiobook and podcast server<br/>Enable with `COMPOSE_PROFILES=audiobookshelf`                                                         | [advplyr/audiobookshelf](https://ghcr.io/advplyr/audiobookshelf)                         | /audiobookshelf        |
 
 Optional containers are not enabled by default, they need to be enabled,
 see [Optional Services](#optional-services) for more information.
@@ -141,6 +143,7 @@ If you want to show Jellyfin information in the homepage, create it in Jellyfin 
 | `JELLYSEERR_API_KEY`           | Jellyseer API key to show information in the homepage                                                                                                                                                  |                                                  |
 | `SABNZBD_API_KEY`              | Sabnzbd API key to show information in the homepage                                                                                                                                                    |                                                  |
 | `AUTOBRR_API_KEY`              | Autobrr API key to show information in the homepage                                                                                                                                                    |                                                  |
+| `AUDIOBOOKSHELF_API_KEY`       | Audiobookshelf API key to show information in the homepage                                                                                                                                             |                                                  |
 | `HOMEPAGE_VAR_TITLE`           | Title of the homepage                                                                                                                                                                                  | `Docker-Compose NAS`                             |
 | `HOMEPAGE_VAR_SEARCH_PROVIDER` | Homepage search provider, [see list here](https://gethomepage.dev/en/widgets/search/)                                                                                                                  | `google`                                         |
 | `HOMEPAGE_VAR_HEADER_STYLE`    | Homepage header style, [see list here](https://gethomepage.dev/en/configs/settings/#header-style)                                                                                                      | `boxed`                                          |
@@ -465,6 +468,18 @@ See [here](./immich/README.md).
 ### Vaultwarden
 
 See [here](./vaultwarden/README.md).
+
+### Audiobookshelf
+
+Enable Audiobookshelf by setting `COMPOSE_PROFILES=audiobookshelf`. It will be accessible at `/audiobookshelf`.
+
+Create your audiobook and podcast directories:
+- Audiobooks: `${DATA_ROOT}/media/audiobooks`
+- Podcasts: `${DATA_ROOT}/media/podcasts`
+
+On first run, create an admin account and configure your libraries pointing to `/audiobooks` and `/podcasts`.
+
+To show information in the homepage, create an API token in Settings > Users > Your User > API Token, and set `AUDIOBOOKSHELF_API_KEY` in `.env`.
 
 ## Customization
 

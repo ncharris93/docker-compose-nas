@@ -24,5 +24,7 @@ docker-compose.override.yml
 /cleanuparr
 /cross-seed
 /autobrr
+/audiobookshelf/config
+/audiobookshelf/metadata
 !/cleanuparr/blacklist.json
 !/cleanuparr/logs/.gitkeep
