@@ -8,6 +8,7 @@ services:
       - ${CONFIG_ROOT:-.}/audiobookshelf/config:/config
       - ${CONFIG_ROOT:-.}/audiobookshelf/metadata:/metadata
       - ${DATA_ROOT}/media/audiobooks:/audiobooks
+      - ${DATA_ROOT}/media/books:/books
       - ${DATA_ROOT}/media/podcasts:/podcasts
     restart: always
     labels:

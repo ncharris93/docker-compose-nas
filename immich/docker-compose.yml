@@ -10,6 +10,7 @@ services:
       REDIS_HOSTNAME: immich_redis
     volumes:
       - ${IMMICH_UPLOAD_LOCATION}:/data
+      - /mnt/data/photos:/mnt/photos:ro
       - /etc/localtime:/etc/localtime:ro
       - ${CONFIG_ROOT:-.}/immich/healthcheck:/healthcheck
     depends_on:
